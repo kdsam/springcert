@@ -1,12 +1,13 @@
 package com.ps.beans.set;
 
+import com.ps.beans.SimpleBean;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -26,5 +27,17 @@ public class SIBeansTest {
         }
 
         //TODO 4. Retrieve beans of types ComplexBean and make sure their dependencies were correctly set.
+        SimpleBean simpleBean0 = (SimpleBean) ctx.getBean("simpleBean0");
+
+        ComplexBeanImpl complexBean0 = (ComplexBeanImpl) ctx.getBean("complexBean0");
+        assertEquals(simpleBean0, complexBean0.getSimpleBean());
+
+        ComplexBeanImpl complexBean1 = (ComplexBeanImpl) ctx.getBean("complexBean1");
+        assertEquals(simpleBean0, complexBean1.getSimpleBean());
+        assertTrue(complexBean1.isComplex());
+
+        ComplexBean2Impl complexBean2 = (ComplexBean2Impl) ctx.getBean("complexBean2");
+        assertEquals(simpleBean0, complexBean1.getSimpleBean());
+        assertTrue(complexBean1.isComplex());
     }
 }
