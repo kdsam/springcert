@@ -19,10 +19,12 @@ import static org.mockito.Mockito.*;
 
 /**
  * Created by iuliana.cosmina on 4/17/16.
+ * kmandawe; USING Mockito
  */
 public class SimpleReviewServiceTest {
     public static final Long REVIEW_ID = 1L;
 
+    // 1. Declare and create the mock
     private ReviewRepo reviewMockRepo = mock(ReviewRepo.class);
 
     private SimpleReviewService  simpleReviewService;
@@ -31,6 +33,7 @@ public class SimpleReviewServiceTest {
     @Before
     public void setUp(){
         simpleReviewService = new SimpleReviewService();
+        // 2. Inject the mock
         simpleReviewService.setRepo(reviewMockRepo);
     }
 
@@ -38,9 +41,12 @@ public class SimpleReviewServiceTest {
     public void findByIdPositive() {
         Review review = new Review();
         review.setId(REVIEW_ID);
+        // 3. Define behavior of mock
         when(reviewMockRepo.findById(REVIEW_ID)).thenReturn(review);
 
+        // 4. Test
         Review result = simpleReviewService.findById(REVIEW_ID);
+        // 5. Validate
         assertNotNull(result);
         assertEquals(review.getId(), result.getId());
     }
@@ -56,7 +62,8 @@ public class SimpleReviewServiceTest {
         Set<Review> reviewSet = new HashSet<>();
         reviewSet.add(review);
 
-        //TODO 17. Define the mock behavoiur using Mockito methods
+        //17. Define the mock behavoiur using Mockito methods
+        when(reviewMockRepo.findAllForUser(user)).thenReturn(reviewSet);
         Set<Review> result = simpleReviewService.findAllByUser(user);
         verify(reviewMockRepo, times(1)).findAllForUser(user);
         assertEquals(result.size(), 1);

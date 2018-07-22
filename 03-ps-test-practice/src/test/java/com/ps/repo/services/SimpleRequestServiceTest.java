@@ -21,22 +21,27 @@ import static com.ps.util.TestObjectsBuilder.*;
 
 /**
  * Created by iuliana.cosmina on 4/17/16.
+ * kmandawe: USING JMock
  */
 public class SimpleRequestServiceTest {
 
     public static final Long REQUEST_ID = 1L;
 
+    // 1. Declare the mock
     private RequestRepo requestMockRepo;
 
+    // 2. Declare and define the context of the object under test
     private Mockery mockery = new Mockery();
 
     private SimpleRequestService simpleRequestService;
 
     @Before
     public void setUp() {
+        // 3. Create the mock
         requestMockRepo = mockery.mock(RequestRepo.class);
 
         simpleRequestService = new SimpleRequestService();
+        // 4. Inject the mock
         simpleRequestService.setRepo(requestMockRepo);
     }
 
@@ -48,13 +53,17 @@ public class SimpleRequestServiceTest {
         req.setEndAt(DateTime.parse("2016-09-18").toDate());
         req.setRequestStatus(RequestStatus.NEW);
 
+        // 5. Define the expectations we have from the mock
         mockery.checking(new Expectations() {{
             allowing(requestMockRepo).findById(REQUEST_ID);
             will(returnValue(req));
         }});
 
+        // 6. Test
         Request result = simpleRequestService.findById(REQUEST_ID);
+        // 7. Check that mock was actually used
         mockery.assertIsSatisfied();
+        // 8. Validate the execution
         assertNotNull(result);
         assertEquals(req.getId(), result.getId());
     }
