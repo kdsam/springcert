@@ -12,7 +12,7 @@
     <bean id="simpleBean1" class="com.ps.sample.SimpleBean"/>
     <bean id="simpleBean2" class="com.ps.sample.SimpleBean"/>
 
-    <!-- TODO 9. Add the necessary attributes to set init and destroy methods for this bean-->
+    <!-- 9. Add the necessary attributes to set init and destroy methods for this bean-->
     <bean id="complexBean" class="com.ps.sample.ComplexBean"
           c:_0-ref="simpleBean1"
           p:simpleBean2-ref="simpleBean2"

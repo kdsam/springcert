@@ -6,13 +6,11 @@ import com.ps.services.PetService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by iuliana.cosmina on 5/6/16.
@@ -32,7 +30,7 @@ public class PetServiceTest {
     @Test
     public void findByIdPositive() {
         Pet pet = simplePetService.findById(PET_ID);
-        assertNull(pet);
+        assertNotNull(pet);
     }
 
 }

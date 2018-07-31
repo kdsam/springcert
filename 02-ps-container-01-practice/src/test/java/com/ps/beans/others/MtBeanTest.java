@@ -17,8 +17,8 @@ public class MtBeanTest {
 
     @Test
     public void testConfig() {
-        //TODO 6. Modify this class to use the new set of configuration files, created by resolving TODO 5.
-        //TODO 7. Try to use wildcards as well.
+        //6. Modify this class to use the new set of configuration files, created by resolving
+        //7. Try to use wildcards as well.
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/others/sample-config-01.xml",
                 "classpath:spring/others/*-cfg.xml");
 

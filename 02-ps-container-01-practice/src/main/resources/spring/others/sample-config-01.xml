@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- TODO 5. Split this file in multiple configuration files. -->
+    <!--5. Split this file in multiple configuration files. -->
 
     <bean id="simpleBean" class="com.ps.beans.SimpleBeanImpl"/>
 
