@@ -17,6 +17,7 @@ import java.util.Set;
  * Created by iuliana.cosmina on 6/4/16.
  */
 @Repository
+@Transactional
 @SuppressWarnings("unchecked")
 public class HibernateUserRepo implements UserRepo {
 
@@ -54,7 +55,9 @@ public class HibernateUserRepo implements UserRepo {
     @Override
     public List<User> findAllByUserName(String username, boolean exactMatch) {
         if (exactMatch) {
-            return new ArrayList<>();  // TODO 36. Add Hibernate query to extract wll users with username = :username
+            return session().createQuery("from User u where username = ?")
+                    .setParameter(0, username).list(); //36. Add Hibernate query to extract wll users with username = :username
+
         } else {
             return session().createQuery("from User u where username like ?")
                     .setParameter(0, "%" + username + "%").list();

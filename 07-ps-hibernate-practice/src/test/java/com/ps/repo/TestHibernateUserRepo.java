@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,13 +34,15 @@ public class TestHibernateUserRepo {
 
     @Before
     public void setUp() {
+        cleanUp();
         assertNotNull(userRepo);
-        create();
+
     }
 
     @Test
     public void testFindById() {
-        List<User> johns = userRepo.findAllByUserName("john.cusack", true);
+        create();
+        List<User> johns = userRepo.findAllByUserName("johncusack", true);
         assertTrue(johns.size() == 1);
     }
 
@@ -57,20 +58,20 @@ public class TestHibernateUserRepo {
         diana.setPassword("test");
         diana.setUserType(UserType.SITTER);
         userRepo.save(diana);
-        List<User> dianas = userRepo.findAllByUserName("diana.ross", true);
+        List<User> dianas = userRepo.findAllByUserName("dianaross", true);
         assertTrue(dianas.size() == 1);
     }
 
     @Test
     public void testUpdate() {
-        List<User> johns = userRepo.findAllByUserName("john.cusack", true);
+        List<User> johns = userRepo.findAllByUserName("johncusack", true);
         User john = johns.get(0);
         userRepo.updatePassword(john.getId(), "newpass");
     }
 
     @Test
     public void testDelete() {
-        List<User> gigis = userRepo.findAllByUserName("gigi.pedala", true);
+        List<User> gigis = userRepo.findAllByUserName("gigipedala", true);
         User gigi = gigis.get(0);
 
         userRepo.deleteById(gigi.getId());
