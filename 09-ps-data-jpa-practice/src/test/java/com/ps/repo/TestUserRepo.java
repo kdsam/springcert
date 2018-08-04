@@ -2,9 +2,7 @@ package com.ps.repo;
 
 import com.ps.base.UserType;
 import com.ps.config.AppConfig;
-import com.ps.config.db.DataSourceConfig;
 import com.ps.config.PersistenceConfig;
-import com.ps.config.db.TestDataConfig;
 import com.ps.ents.User;
 import com.ps.repos.UserRepo;
 import org.junit.Before;
@@ -15,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.ps.util.RecordBuilder.buildUser;
@@ -39,13 +36,13 @@ public class TestUserRepo {
 
     @Test
     public void testFindById() {
-        List<User> johns = userRepo.findAllByUserName("john");
+        List<User> johns = userRepo.findAllByUsername("john");
         assertTrue(johns.size() == 2);
     }
 
     @Test//(expected = EntityNotFoundException.class)
     public void testNoFindById() {
-        User user = userRepo.getOne(99L);
+        User user = userRepo.findOne(99L);
         assertNull(user);
     }
 
@@ -60,7 +57,7 @@ public class TestUserRepo {
 
     @Test
     public void testUpdate() {
-        User john = userRepo.findOneByUsername("john.cusack");
+        User john = userRepo.findOneByUsername("johncusack");
         john.setPassword("newpass");
         userRepo.saveAndFlush(john);
         assertEquals("newpass", john.getPassword());
@@ -70,7 +67,7 @@ public class TestUserRepo {
 
     @Test
     public void testDelete() {
-        User gigi =  userRepo.findOneByUsername("gigi.pedala");
+        User gigi =  userRepo.findOneByUsername("gigipedala");
         userRepo.delete(gigi.getId());
     }
 }

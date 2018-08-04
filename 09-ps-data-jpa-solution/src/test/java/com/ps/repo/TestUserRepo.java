@@ -57,7 +57,7 @@ public class TestUserRepo {
 
     @Test
     public void testUpdate() {
-        User john = userRepo.findOneByUsername("john.cusack");
+        User john = userRepo.findOneByUsername("johncusack");
         john.setPassword("newpass");
         userRepo.saveAndFlush(john);
         assertEquals("newpass", john.getPassword());
@@ -67,7 +67,7 @@ public class TestUserRepo {
 
     @Test
     public void testDelete() {
-        User gigi =  userRepo.findOneByUsername("gigi.pedala");
+        User gigi =  userRepo.findOneByUsername("gigipedala");
         userRepo.delete(gigi.getId());
     }
 }
