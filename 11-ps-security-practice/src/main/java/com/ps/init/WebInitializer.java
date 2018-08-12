@@ -18,7 +18,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
-              // TODO 53. Set the security context as root context
+              //53. Set the security context as root context
+                SecurityConfig.class, ServiceConfig.class
         };
     }
 
